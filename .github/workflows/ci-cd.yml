@@ -1,0 +1,73 @@
+name: ETL Pipeline CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: 'Start date for filtering (YYYY-MM-DD)'
+        required: false
+        default: ''
+      end_date:
+        description: 'End date for filtering (YYYY-MM-DD)'
+        required: false
+        default: ''
+
+jobs:
+  test-and-run:
+    runs-on: ubuntu-latest
+    name: Test and Run ETL Pipeline
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+          
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Run tests
+      run: |
+        python -m pytest test_pipeline.py -v
+        
+    - name: Run ETL Pipeline
+      run: |
+        python main.py
+        
+    - name: Run ETL Pipeline with date filtering (if provided)
+      if: github.event.inputs.start_date != '' || github.event.inputs.end_date != ''
+      run: |
+        python -c "
+        from main import run_pipeline
+        run_pipeline(
+            start_date='${{ github.event.inputs.start_date }}' if '${{ github.event.inputs.start_date }}' else None,
+            end_date='${{ github.event.inputs.end_date }}' if '${{ github.event.inputs.end_date }}' else None
+        )
+        "
+        
+    - name: Upload output files
+      uses: actions/upload-artifact@v3
+      with:
+        name: etl-output
+        path: |
+          revenue.csv
+          daily_sales.csv
+          transformed_orders.csv
+        retention-days: 30

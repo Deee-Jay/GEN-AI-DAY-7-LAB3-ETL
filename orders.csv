@@ -1,0 +1,26 @@
+order_id,customer_id,product,category,price,quantity,order_date
+1,101,Laptop,Electronics,899.99,1,2024-01-15
+2,102,T-shirt,Clothing,29.99,2,2024-01-15
+3,103,Coffee Maker,Home,79.99,1,2024-01-16
+4,104,Headphones,Electronics,199.99,1,2024-01-16
+5,105,Jeans,Clothing,59.99,1,2024-01-17
+6,106,Blender,Home,49.99,2,2024-01-17
+7,107,Smartphone,Electronics,699.99,1,2024-01-18
+8,108,Dress,Clothing,89.99,1,2024-01-18
+9,109,Toaster,Home,39.99,1,2024-01-19
+10,110,Tablet,Electronics,399.99,1,2024-01-19
+11,101,Sneakers,Clothing,119.99,1,2024-01-20
+12,102,Microwave,Home,149.99,1,2024-01-20
+13,103,Watch,Electronics,249.99,1,2024-01-21
+14,104,Jacket,Clothing,149.99,1,2024-01-21
+15,105,Vacuum,Home,299.99,1,2024-01-22
+16,106,Mouse,Electronics,49.99,2,2024-01-22
+17,107,Shirt,Clothing,39.99,3,2024-01-23
+18,108,Oven,Home,599.99,1,2024-01-23
+19,109,Keyboard,Electronics,89.99,1,2024-01-24
+20,110,Shorts,Clothing,34.99,2,2024-01-24
+21,101,Speaker,Electronics,129.99,1,2024-01-25
+22,102,Pants,Clothing,69.99,1,2024-01-25
+23,103,Fridge,Home,899.99,1,2024-01-26
+24,104,Monitor,Electronics,449.99,1,2024-01-26
+25,105,Coat,Clothing,199.99,1,2024-01-27
